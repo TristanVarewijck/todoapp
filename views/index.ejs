@@ -7,11 +7,41 @@
     <%- include('../views/partials/nav'); -%>
     <main>
         <nav>
-        <h1>my ToDoo's</h1>
-        <a href=""><span class="material-icons-round">
-            add_circle_outline
-            </span>
+        <h1>My Booklist</h1>
+        <a class="add" href=""> New Book + </a>
         </nav>
+
+        
+        <div class="list-container">
+    <% allBooks.forEach(function(Book){ %>
+        <a href="/movies/<%= Book._id %>">
+        <article>
+            <div class="content-container">
+            <p 
+            style="font-style: italic; 
+            font-size: .8em;">Datum</p>
+            
+            <h1 style="font-size: 2em;
+            margin: .2em 0 .2em 0;"><%= Book.title %></h1>
+           <hr>
+            <table>
+                <tr class="column-titles">
+                    <th>Auteur</th>
+                    <th>Pages</th>
+                    <th>Price</th>
+                </tr>
+                <tr class="column-info">
+                    <th>String</th>
+                    <th>String</th>
+                    <th>Number</th>
+                </tr>
+            </table>
+            </div>
+        </article>
+        </a>
+        <% }); %>
+        </div>
+
     </main>
     
 </body>
