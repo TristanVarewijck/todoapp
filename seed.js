@@ -10,8 +10,8 @@ db.once('open', function() {
 
 // test data 
 
-// async function deleteBooks(){
-//   await Book.deleteOne({_id: "60c87d10ddb838af6f042ad8"});
+// async function addBook(){
+//   await Book.create({title: "Tristan's Book", auteur: "Tristan Varewijck", pages: 375, price: 12.99, description: "I wrote this when i was drunk"});
 // } 
 
-// deleteBooks()
+// addBook()

@@ -14,12 +14,12 @@
         
         <div class="list-container">
     <% allBooks.forEach(function(Book){ %>
-        <a href="/movies/<%= Book._id %>">
+        <a href="/books/<%= Book._id %>">
         <article>
             <div class="content-container">
             <p 
             style="font-style: italic; 
-            font-size: .8em;">Datum</p>
+            font-size: .8em;">datum</p>
             
             <h1 style="font-size: 2em;
             margin: .2em 0 .2em 0;"><%= Book.title %></h1>
@@ -31,9 +31,9 @@
                     <th>Price</th>
                 </tr>
                 <tr class="column-info">
-                    <th>String</th>
-                    <th>String</th>
-                    <th>Number</th>
+                    <th><%= Book.auteur %></th>
+                    <th><%= Book.pages %></th>
+                    <th><%= Book.price %></th>
                 </tr>
             </table>
             </div>

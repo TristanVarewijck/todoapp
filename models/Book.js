@@ -1,7 +1,6 @@
 // BOOK MODEL 
 const mongoose = require('mongoose');
-const bookSchema = new mongoose.Schema({
-    date: String, 
+const bookSchema = new mongoose.Schema({ 
     title: {
         type: String, 
         required: true, 
@@ -18,6 +17,9 @@ const bookSchema = new mongoose.Schema({
         type: Number, 
         min: [0, 'This cant be a negative number! you got: ${VALUE}'],
     },
+    description: {
+        type: String, 
+    }, 
   });
 
   const Book = mongoose.model('Book', bookSchema);

@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include('../views/partials/head'); -%>
 </head>
 <body>
+    <%- include('../views/partials/nav'); -%>
     <main>
-        <h1>hello world!</h1>
+        <a href="/books">BACK</a>
+        <div class="list-container">
+                <article>
+                    <div class="content-container">
+                    <p 
+                    style="font-style: italic; 
+                    font-size: .8em;">Datum</p>
+                    
+                    <h1 style="font-size: 2em;
+                    margin: .2em 0 .2em 0;"><%= bookDetail.title %></h1>
+                   <hr>
+                    <table>
+                        <tr class="column-titles">
+                            <th>Auteur</th>
+                            <th>Pages</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr class="column-info">
+                            <th>String</th>
+                            <th>String</th>
+                            <th>Number</th>
+                        </tr>
+                    </table>
+                    <p>Description</p>  
+                    </div>
+                </article>
+                <a href="/books/<%= bookDetail._id %>/update">UPDATE</a>
+                <form action="/books/<%= bookDetail._id %>/?_method=DELETE" method="POST" onsubmit="return confirm('Do you really want to submit the form?');">
+                    <label for="delete">Delete this book</label>
+                    <input type="submit" name="delete" id="delete" value="DELETE">
+                </form>
     </main>
 </body>
 </html>
