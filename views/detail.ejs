@@ -24,12 +24,12 @@
                             <th>Price</th>
                         </tr>
                         <tr class="column-info">
-                            <th>String</th>
-                            <th>String</th>
-                            <th>Number</th>
+                            <th><%= bookDetail.auteur %></th>
+                            <th><%= bookDetail.pages %></th>
+                            <th><%= bookDetail.price %></th>
                         </tr>
                     </table>
-                    <p>Description</p>  
+                    <p><%= bookDetail.description %></p>  
                     </div>
                 </article>
                 <a href="/books/<%= bookDetail._id %>/update">UPDATE</a>

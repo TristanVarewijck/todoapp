@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../views/partials/head'); -%>
+</head>
+<body>
+    <%- include('../views/partials/nav'); -%>
+    <main>
+        <div class="list-container">
+        <form action="/books/<%= bookDetail._id %>/?_method=PUT" method="POST">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" placeholder="<%= bookDetail.title %>">
+
+            <label for="auteur">Auteur</label>
+            <input type="text" name="auteur" id="auteur" placeholder="<%= bookDetail._auteur %>">
+
+            <label for="pages">Pages</label>
+            <input type="text" name="pages" id="pages" placeholder="<%= bookDetail.pages %>">
+
+            <label for="price">Price</label>
+            <input type="text" name="price" id="price" placeholder="<%= bookDetail.price %>">
+
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" placeholder="<%= bookDetail.description %>">
+
+            <input type="submit">
+        </form>
+        </div>
+    </main>
+    
+</body>
+</html>
