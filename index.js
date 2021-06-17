@@ -40,13 +40,25 @@ app.get('/books', async (req, res) => {
     });
   });
 
+// create new 
+app.get('/books/new-book', (req, res) => {
+  res.render('create'); 
+})
+
+app.post('/books', async (req, res) => {
+  const newBook = req.body;
+  console.log(newBook); 
+  await Book.create(newBook); 
+  // res.redirect('/');
+  res.render('create')
+});
+
 app.get('/books/:id' , async (req, res) => {
   let { id } = req.params; 
   let bookDetail = await Book.findById(id); 
   res.render('detail',
    {bookDetail})
 });
-
 
 // delete 
 app.delete('/books/:id', async (req, res) => {

@@ -4,7 +4,8 @@
   "description": "minimal todoapp (rest API) ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build-css": "tailwindcss build src/styles.css -o public/styles.css"
   },
   "repository": {
     "type": "git",

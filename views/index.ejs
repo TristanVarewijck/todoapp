@@ -3,15 +3,13 @@
 <head>
     <%- include('../views/partials/head'); -%>
 </head>
-<body>
+<body class="text-blue-700">
     <%- include('../views/partials/nav'); -%>
     <main>
         <nav>
         <h1>My Booklist</h1>
-        <a class="add" href=""> New Book + </a>
+        <a class="add" href="/books/new-book"> New Book + </a>
         </nav>
-
-        
         <div class="list-container">
     <% allBooks.forEach(function(Book){ %>
         <a href="/books/<%= Book._id %>">
