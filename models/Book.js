@@ -1,6 +1,10 @@
 // BOOK MODEL 
 const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema({ 
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
     title: {
         type: String, 
         required: true, 
@@ -20,6 +24,9 @@ const bookSchema = new mongoose.Schema({
     description: {
         type: String, 
     }, 
+    image: {
+        type: String,
+      },
   });
 
   const Book = mongoose.model('Book', bookSchema);

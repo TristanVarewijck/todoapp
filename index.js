@@ -4,7 +4,15 @@ const app = express();
 const port = 5050; 
 let methodOverride = require('method-override')
 const Book = require('./models/Book')
+const File = require("./models/upload");
 const bodyParser = require('body-parser')
+const multer = require('multer');
+
+console.log(File); 
+
+// storage
+const upload = multer({ dest: "public/images" });
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -43,7 +51,7 @@ app.get('/books', async (req, res) => {
   //  else {
   //     let allBooks = await Book.find({});
   //  }
-   let allBooks = await Book.find({});
+   let allBooks = await Book.find().sort({createdAt: -1});
     res.render('index', {
       allBooks,
     });
@@ -54,13 +62,25 @@ app.get('/books/new-book', (req, res) => {
   res.render('create'); 
 })
 
-app.post('/books', async (req, res) => {
+app.post('/books', upload.single("myFile"), async (req, res) => {
   const newBook = req.body;
   console.log(newBook); 
   await Book.create(newBook); 
   // res.redirect('/');
-  res.render('create')
+  res.redirect('/books')
 });
+
+// file upload 
+// app.get("/books/new-book/upload", (req, res) => {
+//   res.render('imgUpload');
+// })
+
+// //API Endpoint for uploading file
+// app.post("/books/new-book/upload", upload.single("myFile"), (req, res) => {
+//   let file = req.file; 
+//   console.log(req.file);
+//   res.render("imgUpload"); 
+// });
 
 app.get('/books/:id' , async (req, res) => {
   let { id } = req.params; 
