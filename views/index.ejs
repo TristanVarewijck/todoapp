@@ -8,45 +8,18 @@
     <main>
         <div class="list-container">
     <% allBooks.forEach(function(Book){ %>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card">
+            <img src="/images/no-image.png" class="card-img-top" alt="...">
             <div class="card-body">
               <h2 class="card-title"><%= Book.title %></h2>
-              <small class="form-text text-muted"><%= Book.auteur %></small>
-              
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <p> <span>Auteur:</span> <%= Book.auteur %></p>
+              <p> <span>Pages:</span> <%= Book.pages %> pages</p>
+              <p> <span>Price:</span> $<%= Book.price %>,-</p>
+              <a href="/books/<%= Book._id %>" class="btn btn-primary" style="width:100%;">More</a>
             </div>
           </div>
         <% }); %>
         </div>
-
-        <!-- <a href="/books/">
-            <article>
-                <div class="content-container">
-                <p 
-                style="font-style: italic; 
-                font-size: .8em;">datum</p>
-                
-                <h1 style="font-size: 2em;
-                margin: .2em 0 .2em 0;"></h1>
-               <hr>
-                <table>
-                    <tr class="column-titles">
-                        <th>Auteur</th>
-                        <th>Pages</th>
-                        <th>Price</th>
-                    </tr>
-                    <tr class="column-info">
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </table>
-                </div>
-            </article>
-            </a> -->
-        
-
     </main>
     
 </body>
