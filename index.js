@@ -23,6 +23,7 @@ db.once('open', function() {
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))
 app.set('view engine', 'ejs');
+// app.use('/css', express.static(('node_modules/bootstrap/dist/css')))
 app.use(express.static('public')); 
   
 
@@ -34,7 +35,15 @@ app.use(express.static('public'));
 
 // get all and 1 book(s)
 app.get('/books', async (req, res) => {
-    let allBooks = await Book.find({});
+
+    
+  //   if ( button === oud ){
+  //     let allBooks = await Book.find({}) 
+  //   } 
+  //  else {
+  //     let allBooks = await Book.find({});
+  //  }
+   let allBooks = await Book.find({});
     res.render('index', {
       allBooks,
     });

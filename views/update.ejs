@@ -6,25 +6,37 @@
 <body>
     <%- include('../views/partials/nav'); -%>
     <main>
-        <div class="list-container">
+        
+    <div class="list-container">
         <form action="/books/<%= bookDetail._id %>/?_method=PUT" method="POST">
+        <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" placeholder="<%= bookDetail.title %>">
+            <input type="text" class="form-control" name="title" id="title"  value="<%= bookDetail.title %>" placeholder="<%= bookDetail.title %>">
+        </div>
 
+        <div class="form-group">
             <label for="auteur">Auteur</label>
-            <input type="text" name="auteur" id="auteur" placeholder="<%= bookDetail._auteur %>">
+            <input type="text" class="form-control" name="auteur" id="auteur"  value="<%= bookDetail.auteur %>" placeholder="<%= bookDetail.auteur %>">
+        </div>
 
+        <div class="form-group">
             <label for="pages">Pages</label>
-            <input type="text" name="pages" id="pages" placeholder="<%= bookDetail.pages %>">
+            <input type="number" class="form-control" name="pages" id="pages"  value="<%= bookDetail.pages %>" placeholder="<%= bookDetail.pages %>">
+        </div>
 
+        <div class="form-group">
             <label for="price">Price</label>
-            <input type="text" name="price" id="price" placeholder="<%= bookDetail.price %>">
+            <input type="number" class="form-control" name="price" id="price" value="<%= bookDetail.price %>" placeholder="<%= bookDetail.price %>">
+        </div>
 
+        <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" name="description" id="description" placeholder="<%= bookDetail.description %>">
+            <textarea class="form-control" id="description" name="description" rows="3" value="<%= bookDetail.description %>" placeholder="<%= bookDetail.description %>"></textarea>
+        </div>
 
-            <input type="submit">
-        </form>
+        <button style="width: 100%" type="submit" class="btn btn-primary btn-lg">UPDATE<button>
+        </form> 
+    </div>
         </div>
     </main>
     

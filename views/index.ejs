@@ -6,39 +6,46 @@
 <body class="text-blue-700">
     <%- include('../views/partials/nav'); -%>
     <main>
-        <nav>
-        <h1>My Booklist</h1>
-        <a class="add" href="/books/new-book"> New Book + </a>
-        </nav>
         <div class="list-container">
     <% allBooks.forEach(function(Book){ %>
-        <a href="/books/<%= Book._id %>">
-        <article>
-            <div class="content-container">
-            <p 
-            style="font-style: italic; 
-            font-size: .8em;">datum</p>
-            
-            <h1 style="font-size: 2em;
-            margin: .2em 0 .2em 0;"><%= Book.title %></h1>
-           <hr>
-            <table>
-                <tr class="column-titles">
-                    <th>Auteur</th>
-                    <th>Pages</th>
-                    <th>Price</th>
-                </tr>
-                <tr class="column-info">
-                    <th><%= Book.auteur %></th>
-                    <th><%= Book.pages %></th>
-                    <th><%= Book.price %></th>
-                </tr>
-            </table>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h2 class="card-title"><%= Book.title %></h2>
+              <small class="form-text text-muted"><%= Book.auteur %></small>
+              
+              <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
-        </article>
-        </a>
+          </div>
         <% }); %>
         </div>
+
+        <!-- <a href="/books/">
+            <article>
+                <div class="content-container">
+                <p 
+                style="font-style: italic; 
+                font-size: .8em;">datum</p>
+                
+                <h1 style="font-size: 2em;
+                margin: .2em 0 .2em 0;"></h1>
+               <hr>
+                <table>
+                    <tr class="column-titles">
+                        <th>Auteur</th>
+                        <th>Pages</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr class="column-info">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </table>
+                </div>
+            </article>
+            </a> -->
+        
 
     </main>
     
