@@ -4,14 +4,22 @@ const app = express();
 const port = 5050; 
 let methodOverride = require('method-override')
 const Book = require('./models/Book')
-const File = require("./models/upload");
+// const File = require("./models/upload");
 const bodyParser = require('body-parser')
-const multer = require('multer');
-
-console.log(File); 
+const multer = require('multer'); 
 
 // storage
-const upload = multer({ dest: "public/images" });
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now()); 
+  }
+})
+ 
+var upload = multer({ storage: storage }).single('file'); 
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -62,8 +70,15 @@ app.get('/books/new-book', (req, res) => {
   res.render('create'); 
 })
 
-app.post('/books', upload.single("myFile"), async (req, res) => {
-  const newBook = req.body;
+app.post('/books', upload, async (req, res) => {
+  const newBook = {
+    title: req.body.title, 
+    auteur: req.body.auteur, 
+    pages: req.body.price, 
+    price: req.body.price, 
+    description: req.body.description, 
+    image: req.file.filename,
+  }
   console.log(newBook); 
   await Book.create(newBook); 
   // res.redirect('/');
@@ -104,9 +119,16 @@ app.get('/books/:id/update', async (req, res) => {
   res.render('update', {bookDetail})
 });
 
-app.put('/books/:id/', async (req, res) => {
+app.put('/books/:id/', upload, async (req, res) => {
   let { id } = req.params;
-  let bookUpdate = req.body;
+  let bookUpdate = {
+    title: req.body.title, 
+    auteur: req.body.auteur, 
+    pages: req.body.price, 
+    price: req.body.price, 
+    description: req.body.description, 
+    image: req.file.filename,
+  }
   console.log(bookUpdate)
   await Book.findByIdAndUpdate(id, bookUpdate);
   res.redirect('/books'); 

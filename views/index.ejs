@@ -9,7 +9,7 @@
         <div class="list-container">
     <% allBooks.forEach(function(Book){ %>
         <div class="card">
-            <img src="/images/no-image.png" class="card-img-top" alt="...">
+            <img src="/images/<%= Book.image %>" class="card-img-top" alt="<%= Book.image %>">
             <div class="card-body">
               <h2 class="card-title"><%= Book.title %></h2>
               <p> <span>Auteur:</span> <%= Book.auteur %></p>
