@@ -24,12 +24,9 @@ const bookSchema = new mongoose.Schema({
     description: {
         type: String, 
     }, 
-    image: {
-        type: String,
-        default: "no-image.png", 
-        required: false,  
-    
-  }});
+    image: { type: Buffer, default:"no-image.png",}
+
+});
 
   const Book = mongoose.model('Book', bookSchema);
 

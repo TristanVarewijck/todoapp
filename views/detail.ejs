@@ -34,7 +34,11 @@
                 </article> -->
 
                 <div class="card">
-                    <img src="/images/<%= bookDetail.image %>" class="card-img-top" alt="<%= bookDetail.image %>">
+                    
+                    <% if(bookDetail.image){ %> 
+                    <img src="/images/<%= bookDetail.image %>" class="card-img-top" alt="book cover">
+                    <% } %>
+
                     <div class="card-body">
                       <h2 class="card-title"><%= bookDetail.title %></h2>
                       <p> <span>Auteur:</span> <%= bookDetail.auteur %></p>

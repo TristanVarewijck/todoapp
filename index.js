@@ -19,6 +19,7 @@ let storage = multer.diskStorage({
     cb(null, file.fieldname + '-' + Date.now()); 
   }
 })
+
  
 let upload = multer({ storage: storage }).single('file'); 
 
@@ -71,15 +72,17 @@ app.get('/books/new-book', (req, res) => {
   res.render('create'); 
 })
 
-app.post('/books', upload, async (req, res) => {
+app.post('/books', upload, async (req, res) => { 
   const newBook = {
     title: req.body.title, 
     auteur: req.body.auteur, 
-    pages: req.body.price, 
+    pages: req.body.pages, 
     price: req.body.price, 
-    description: req.body.description, 
+    description: req.body.description,
     image: req.file.filename,
   }
+
+  
   console.log(newBook); 
   await Book.create(newBook); 
   res.redirect('/books')
@@ -112,10 +115,10 @@ app.put('/books/:id/', upload, async (req, res) => {
   let updateBook = {
     title: req.body.title, 
     auteur: req.body.auteur, 
-    pages: req.body.price, 
+    pages: req.body.pages, 
     price: req.body.price, 
     description: req.body.description, 
-    image: req.file.filename
+    image: req.file.filename,
   }
   await Book.findByIdAndUpdate(id, updateBook);
   res.redirect('/books'); 
