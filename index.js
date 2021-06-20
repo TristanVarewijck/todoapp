@@ -78,25 +78,12 @@ app.post('/books', upload, async (req, res) => {
     pages: req.body.price, 
     price: req.body.price, 
     description: req.body.description, 
-    image: req.file,
+    image: req.file.filename,
   }
   console.log(newBook); 
   await Book.create(newBook); 
-  // res.redirect('/');
   res.redirect('/books')
 });
-
-// file upload 
-// app.get("/books/new-book/upload", (req, res) => {
-//   res.render('imgUpload');
-// })
-
-// //API Endpoint for uploading file
-// app.post("/books/new-book/upload", upload.single("myFile"), (req, res) => {
-//   let file = req.file; 
-//   console.log(req.file);
-//   res.render("imgUpload"); 
-// });
 
 app.get('/books/:id' , async (req, res) => {
   let { id } = req.params; 
@@ -122,22 +109,17 @@ app.get('/books/:id/update', async (req, res) => {
 
 app.put('/books/:id/', upload, async (req, res) => {
   let { id } = req.params;
-  let bookUpdate = {
+  let updateBook = {
     title: req.body.title, 
     auteur: req.body.auteur, 
     pages: req.body.price, 
     price: req.body.price, 
     description: req.body.description, 
-    image: req.file,
+    image: req.file.filename
   }
-  console.log(bookUpdate)
-  await Book.findByIdAndUpdate(id, bookUpdate);
+  await Book.findByIdAndUpdate(id, updateBook);
   res.redirect('/books'); 
 })
-
-
-
-
 
 app.listen(port, () => {
 console.log(colors.rainbow(`Example app listening at http://localhost:${port}`))
