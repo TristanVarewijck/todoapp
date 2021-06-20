@@ -7,10 +7,11 @@ const Book = require('./models/Book')
 // const File = require("./models/upload");
 const bodyParser = require('body-parser')
 const multer = require('multer'); 
+require('dotenv').config()
 
 // storage
 // SET STORAGE
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/images')
   },
@@ -19,14 +20,14 @@ var storage = multer.diskStorage({
   }
 })
  
-var upload = multer({ storage: storage }).single('file'); 
+let upload = multer({ storage: storage }).single('file'); 
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/bookApp', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
 
 const db = mongoose.connection;
@@ -77,7 +78,7 @@ app.post('/books', upload, async (req, res) => {
     pages: req.body.price, 
     price: req.body.price, 
     description: req.body.description, 
-    image: req.file.filename,
+    image: req.file,
   }
   console.log(newBook); 
   await Book.create(newBook); 
@@ -127,7 +128,7 @@ app.put('/books/:id/', upload, async (req, res) => {
     pages: req.body.price, 
     price: req.body.price, 
     description: req.body.description, 
-    image: req.file.filename,
+    image: req.file,
   }
   console.log(bookUpdate)
   await Book.findByIdAndUpdate(id, bookUpdate);
