@@ -33,11 +33,22 @@
                     </div>
                 </article> -->
 
-                <div class="card">
+                   <div class="card">
                     
                     <% if(bookDetail.image){ %> 
                     <img src="/images/<%= bookDetail.image %>" class="card-img-top" alt="book cover">
                     <% } %>
+                    <button class="showUploadButton" onclick="showUploadForm()"><span class="material-icons">edit</span> Change image</button>
+
+                    
+                        <form id="uploadForm" class="update-image" action="">
+                        <div class="form-group"> 
+                            <label for="file">alt="book-cover"></label>
+                            <input class="form-control" type="file"  id="file" name="file" required/>
+                        </div>
+                        </form>
+                  
+                
 
                     <div class="card-body">
                       <h2 class="card-title"><%= bookDetail.title %></h2>
@@ -54,5 +65,7 @@
                     <input class="btn btn-outline-danger type" type="submit" name="delete" id="delete" value="DELETE">
                 </form>
     </main>
+    
+ <%- include('../views/partials/footer'); -%>
 </body>
 </html>

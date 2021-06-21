@@ -45,6 +45,7 @@ ul{
 
     .card{
         margin-top: $default-margin; 
+        position: relative;
 
         .card-body{
             
@@ -70,5 +71,28 @@ ul{
     }
 }  
 
+
+.showUploadButton{
+    position: absolute;
+    width: 50px; 
+    height: auto;
+    background: none;
+    color: $base-color; 
+    right: 1%; 
+    top: 3%; 
+    border: none;
+
+}
+
+
+.update-image{
+   display: none;
+}
+
+.update-image-show{
+    background-color: green;
+    display: block; 
+    transition: .2s;
+}
  
 
