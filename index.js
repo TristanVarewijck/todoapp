@@ -80,18 +80,18 @@ app.post('/books', upload, async (req, res) => {
     pages: req.body.pages, 
     price: req.body.price, 
     description: req.body.description,
-    image: req.file.filename,
+    image: req.file,
   }
 
   console.log(newBook);
   console.log(newBook.image); 
 
-  if(this.newBook.image === undefined || null || 0){
-    console.log('image not found...'); 
-  } else{
-    console.log('NICE'); 
-  }
-  
+  if (typeof req.file === "undefined") {
+    Book.image = "/images/no-image.png";
+   } else{
+    Book.image = `/images/${req.file.filename}`;
+   }
+
   await Book.create(newBook); 
   res.redirect('/books')
 });
