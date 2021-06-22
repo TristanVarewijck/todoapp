@@ -74,26 +74,24 @@ app.get('/books/new-book', (req, res) => {
 })
 
 app.post('/books', upload, async (req, res) => { 
-  const newBook = {
-    title: req.body.title, 
-    auteur: req.body.auteur, 
-    pages: req.body.pages, 
-    price: req.body.price, 
-    description: req.body.description,
-    image: req.file,
-  }
-
-  console.log(newBook);
-  console.log(newBook.image); 
-
-  if (typeof req.file === "undefined") {
-    Book.image = "/images/no-image.png";
+   const newBook = new Book();
+    newBook.title =  req.body.title; 
+    newBook.auteur = req.body.auteur; 
+    newBook.pages = req.body.pages; 
+    newBook.price = req.body.price; 
+    newBook.description = req.body.description;
+    if (typeof req.file === "undefined") {
+    newBook.image = "no-image.png";
    } else{
-    Book.image = `/images/${req.file.filename}`;
+    newBook.image = `${req.file.filename}`;
    }
 
-  await Book.create(newBook); 
-  res.redirect('/books')
+   newBook.save(function(err) {
+    if (err) {
+      res.send(err);
+    }
+    return res.redirect("/books");
+  });
 });
 
 app.get('/books/:id' , async (req, res) => {
