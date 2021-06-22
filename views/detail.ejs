@@ -7,32 +7,9 @@
     <%- include('../views/partials/nav'); -%>
     <main>
         <div class="list-container">
-        <a class="badge badge-dark" href="/books">Back</a>
-                <!-- <article>
-                    <div class="content-container">
-                    <p 
-                    style="font-style: italic; 
-                    font-size: .8em;">Datum</p>
-                    
-                    <h1 style="font-size: 2em;
-                    margin: .2em 0 .2em 0;"><%= bookDetail.title %></h1>
-                   <hr>
-                    <table>
-                        <tr class="column-titles">
-                            <th>Auteur</th>
-                            <th>Pages</th>
-                            <th>Price</th>
-                        </tr>
-                        <tr class="column-info">
-                            <th><%= bookDetail.auteur %></th>
-                            <th><%= bookDetail.pages %></th>
-                            <th><%= bookDetail.price %></th>
-                        </tr>
-                    </table>
-                    <p><%= bookDetail.description %></p>  
-                    </div>
-                </article> -->
-
+        <a class="back-button" href="/books"><span class="material-icons">
+            arrow_back
+            </span> <p>Back</p> </a>
                    <div class="card">
                     
                     <% if(bookDetail.image){ %> 
@@ -45,7 +22,9 @@
                         <div class="form-group"> 
                             <label for="file"></label>
                             <input class="form-control" type="file"  id="file" name="file" required/>
-                            <input type="submit" value="Upload"> 
+                             <div>
+                            <input class="upload-button" type="submit" value="Upload"> 
+                             </div>
                         </div>
                         </form>
                   
@@ -57,14 +36,13 @@
                       <p> <span>Pages:</span> <%= bookDetail.pages %> pages</p>
                       <p> <span>Price:</span> $<%= bookDetail.price %>,-</p>
                       <p> <span>description:</span> <%= bookDetail.description %></p>
+                      <a class="btn btn-primary" style="width: 100%; margin: 1em 0 .5em 0;" href="/books/<%= bookDetail._id %>/update">Change Information</a>
+                      <form action="/books/<%= bookDetail._id %>/?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure that you want to delete this?');">
+                        <input class="btn btn-outline-danger type" type="submit" name="delete" id="delete" value="DELETE">
+                    </form>   
                     </div>
                   </div>
 
-
-                <a class="btn btn-primary" style="width: 100%; margin: 1em 0 .5em 0;" href="/books/<%= bookDetail._id %>/update">Change Information</a>
-                <form action="/books/<%= bookDetail._id %>/?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure that you want to delete this?');">
-                    <input class="btn btn-outline-danger type" type="submit" name="delete" id="delete" value="DELETE">
-                </form>
     </main>
     
  <%- include('../views/partials/footer'); -%>

@@ -83,8 +83,15 @@ app.post('/books', upload, async (req, res) => {
     image: req.file.filename,
   }
 
+  console.log(newBook);
+  console.log(newBook.image); 
+
+  if(this.newBook.image === undefined || null || 0){
+    console.log('image not found...'); 
+  } else{
+    console.log('NICE'); 
+  }
   
-  console.log(newBook); 
   await Book.create(newBook); 
   res.redirect('/books')
 });
