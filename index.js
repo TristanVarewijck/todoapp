@@ -96,6 +96,16 @@ app.get('/books/:id' , async (req, res) => {
    {bookDetail})
 });
 
+app.patch('/books/:id', upload, async (req, res) => {
+  let { id } = req.params;
+  let addFile = {
+    image: req.file.filename
+  }
+  await Book.findByIdAndUpdate(id, addFile);
+
+  res.redirect(`/books/${id}`);  
+})
+
 // delete 
 app.delete('/books/:id', async (req, res) => {
   let { id } = req.params; 
@@ -111,7 +121,7 @@ app.get('/books/:id/update', async (req, res) => {
   res.render('update', {bookDetail})
 });
 
-app.put('/books/:id/', upload, async (req, res) => {
+app.put('/books/:id/update', upload, async (req, res) => {
   let { id } = req.params;
   let updateBook = {
     title: req.body.title, 
@@ -119,10 +129,9 @@ app.put('/books/:id/', upload, async (req, res) => {
     pages: req.body.pages, 
     price: req.body.price, 
     description: req.body.description, 
-    image: req.file.filename,
   }
   await Book.findByIdAndUpdate(id, updateBook);
-  res.redirect('/books'); 
+  res.redirect(`/books/${id}`); 
 })
 
 app.listen(port, () => {

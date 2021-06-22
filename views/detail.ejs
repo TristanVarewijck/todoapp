@@ -38,13 +38,14 @@
                     <% if(bookDetail.image){ %> 
                     <img src="/images/<%= bookDetail.image %>" class="card-img-top" alt="book cover">
                     <% } %>
-                    <button class="showUploadButton" onclick="showUploadForm()"><span class="material-icons">edit</span> Change image</button>
+                    <button class="showUploadButton" onclick="showUploadForm()"><span class="material-icons">edit</span></button>
 
                     
-                        <form id="uploadForm" class="update-image" action="">
+                        <form id="uploadForm" class="update-image" action="/books/<%= bookDetail._id %>/?_method=PATCH" method="POST" enctype="multipart/form-data">
                         <div class="form-group"> 
-                            <label for="file">alt="book-cover"></label>
+                            <label for="file"></label>
                             <input class="form-control" type="file"  id="file" name="file" required/>
+                            <input type="submit" value="Upload"> 
                         </div>
                         </form>
                   
