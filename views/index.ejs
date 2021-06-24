@@ -7,6 +7,22 @@
     <%- include('../views/partials/nav'); -%>
     <main>
 
+      <!-- FILTER  -->
+
+      <form action="/books" method="GET">
+        <label for="maxPrice" class="form-label" >Boek prijs (max)</label>
+        <input type="number"  name="maxPrice" max="100">
+      
+        <br>
+        <label for="maxPages" class="form-label">Boek prijs (max)</label>
+        <input type="number" name="maxPages">
+
+        <input type="submit" class="btn btn-primary btn">
+      </form>
+
+
+  
+
         <div class="list-container">
         <% allBooks.forEach(function(Book){ %>
         <div class="card">
@@ -22,6 +38,7 @@
         <% }); %>
         </div>
     </main>
+    <%- include('../views/partials/footer'); -%>
     
 </body>
 </html>

@@ -46,25 +46,27 @@ app.set('view engine', 'ejs');
 app.use(express.static('public')); 
   
 
-// app.get('/', async (req, res) => {
-//   res.redirect('/books');
-// });
-
 
 
 // get all and 1 book(s)
 app.get('/books', async (req, res) => {
+   // filter 
 
-    
-  //   if ( button === oud ){
-  //     let allBooks = await Book.find({}) 
-  //   } 
-  //  else {
-  //     let allBooks = await Book.find({});
-  //  }
-   let allBooks = await Book.find().sort({createdAt: -1});
+   let allBooks = await Book.find().sort({createdAt: -1}); 
+   let filteredBooks = {}; 
+
+   if(req.body.maxPrice){
+    allBooks = allBooks.filter(allBooks => { return allBooks.price <= req.body.maxPrice })
+   }
+
+   if (req.body.dista !== 'all') {
+    groups = groups.filter(group => { return group.distance <= req.body.distance })
+  }
+     
+      
+   
     res.render('index', {
-      allBooks,
+      allBooks, filteredBooks
     });
   });
 
@@ -118,7 +120,6 @@ app.delete('/books/:id', async (req, res) => {
   res.redirect('/books')
 }); 
 
-
 // update
 app.get('/books/:id/update', async (req, res) => {
   let { id } = req.params;
@@ -137,6 +138,12 @@ app.put('/books/:id/update', upload, async (req, res) => {
   }
   await Book.findByIdAndUpdate(id, updateBook);
   res.redirect(`/books/${id}`); 
+})
+
+// Search BOOKS 
+app.get('/bookspot', async (req, res) => {
+  // SEARCH BAR
+  res.render('findBooks')
 })
 
 app.listen(port, () => {
