@@ -53,22 +53,30 @@ app.get('/books', async (req, res) => {
    // filter 
 
    let allBooks = await Book.find().sort({createdAt: -1}); 
-   let filteredBooks = {}; 
-
-   if(req.body.maxPrice){
-    allBooks = allBooks.filter(allBooks => { return allBooks.price <= req.body.maxPrice })
-   }
-
-   if (req.body.dista !== 'all') {
-    groups = groups.filter(group => { return group.distance <= req.body.distance })
-  }
-     
-      
-   
     res.render('index', {
-      allBooks, filteredBooks
+      allBooks,
     });
   });
+
+//   // create new 
+// app.post('/books', async (req, res) => {
+//   // let allBooks = await Book.find(); 
+//   let allBooks = await Book.find(); 
+
+//   // FILTER 
+//   if (req.body.maxPrice !== '') {
+//     allBooks = allBooks.filter(Book => { return Book.price <= req.body.maxPrice });
+//   }
+//   if (req.body.maxPages !== '') {
+//     allBooks = allBooks.filter(Book => { return Book.pages <= req.body.maxPages});
+//   }
+
+
+//   console.log(req.body);  
+//   res.redirect('/books'); 
+// })
+
+
 
 // create new 
 app.get('/books/new-book', (req, res) => {
