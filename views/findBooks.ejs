@@ -5,7 +5,18 @@
   </head>
   <body>
     <%- include('../views/partials/nav'); -%>
-    <div id="content"></div>
+
+    
+
+    <div id="content">
+      <form action="/bookspot" style="margin-top: 5em;">
+        <label for="search">Search Books</label>
+        <input type="text" id="search" name="bookName">
+        <br>
+        <input type="submit">
+      </form>
+
+    </div>
     <script>
       function handleResponse(response) {
       for (var i = 0; i < response.items.length; i++) {
@@ -15,7 +26,8 @@
       }
     }
     </script>
-    <script src="https://www.googleapis.com/books/v1/volumes?q=Tristan&callback=handleResponse"></script>
+
+    <script src="<%= fullString %>"></script>
   </body>
 </html>
 

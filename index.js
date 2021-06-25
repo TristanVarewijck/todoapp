@@ -46,8 +46,6 @@ app.set('view engine', 'ejs');
 app.use(express.static('public')); 
   
 
-
-
 // get all and 1 book(s)
 app.get('/books', async (req, res) => {
    // filter 
@@ -57,26 +55,6 @@ app.get('/books', async (req, res) => {
       allBooks,
     });
   });
-
-//   // create new 
-// app.post('/books', async (req, res) => {
-//   // let allBooks = await Book.find(); 
-//   let allBooks = await Book.find(); 
-
-//   // FILTER 
-//   if (req.body.maxPrice !== '') {
-//     allBooks = allBooks.filter(Book => { return Book.price <= req.body.maxPrice });
-//   }
-//   if (req.body.maxPages !== '') {
-//     allBooks = allBooks.filter(Book => { return Book.pages <= req.body.maxPages});
-//   }
-
-
-//   console.log(req.body);  
-//   res.redirect('/books'); 
-// })
-
-
 
 // create new 
 app.get('/books/new-book', (req, res) => {
@@ -149,9 +127,19 @@ app.put('/books/:id/update', upload, async (req, res) => {
 })
 
 // Search BOOKS 
-app.get('/bookspot', async (req, res) => {
+app.get('/bookspot/', async (req, res) => {
   // SEARCH BAR
-  res.render('findBooks')
+  let apiCall = "https://www.googleapis.com/books/v1/volumes"
+  let bookName = req.query.bookName; 
+  let fullString;
+
+  if(req.query.bookName){
+  fullString = apiCall + "?q=" + bookName + "&callback=handleResponse"; 
+  } else{
+  console.log('doenst work man!')
+  }
+  
+  res.render('findBooks', {fullString, bookName, apiCall}); 
 })
 
 app.listen(port, () => {
