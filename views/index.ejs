@@ -8,20 +8,12 @@
     <main>
 
       <!-- FILTER  -->
-
-      <form action="/books" method="POST">
-        <label for="maxPrice" class="form-label" >Boek prijs (max)</label>
-        <input type="number"  name="maxPrice" max="100">
-      
-        <br>
-        <label for="maxPages" class="form-label">Boek prijs (max)</label>
-        <input type="number" name="maxPages">
-
-        <input type="submit" class="btn btn-primary btn">
-      </form>
-
-
         <div class="list-container">
+          <form action="/books" method="GET">
+            <label for="search" class="form-label" >Zoek boek bij naam:</label>
+            <input type="search" name="search" placeholder="Type in a Book name:">
+            <button onClick="window.location.reload();">reset </button>
+          </form>
         <% allBooks.forEach(function(Book){ %>
         <div class="card">
             <img src="/images/<%= Book.image %>" class="card-img-top" alt="<%= Book.image %>">
@@ -37,6 +29,7 @@
         </div>
     </main>
     <%- include('../views/partials/footer'); -%>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
     
 </body>
 </html>

@@ -7,7 +7,8 @@ const Book = require('./models/Book')
 // const File = require("./models/upload");
 const bodyParser = require('body-parser')
 const multer = require('multer'); 
-require('dotenv').config()
+require('dotenv').config();
+
 
 
 // storage
@@ -39,18 +40,19 @@ db.once('open', function() {
 })
 
 
-// override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))
 app.set('view engine', 'ejs');
-// app.use('/css', express.static(('node_modules/bootstrap/dist/css')))
 app.use(express.static('public')); 
   
 
 // get all and 1 book(s)
 app.get('/books', async (req, res) => {
    // filter 
+    let allBooks = await Book.find().sort({createdAt: -1}); 
 
-   let allBooks = await Book.find().sort({createdAt: -1}); 
+    if(req.query.search){
+      allBooks = await Book.find({title: req.query.search});
+    }
     res.render('index', {
       allBooks,
     });
