@@ -6,28 +6,25 @@
   <body>
     <%- include('../views/partials/nav'); -%>
 
-    
+    <main>
+        <form action="/bookspot/" style="margin-top: 5em;" method="GET">
+          <label for="search">Search Books</label>
+          <input type="text" id="search" name="q">
+          <br>
+          <input type="submit">
+        </form>
 
-    <div id="content">
-      <form action="/bookspot" style="margin-top: 5em;">
-        <label for="search">Search Books</label>
-        <input type="text" id="search" name="bookName">
-        <br>
-        <input type="submit">
-      </form>
-
-    </div>
-    <script>
-      function handleResponse(response) {
-      for (var i = 0; i < response.items.length; i++) {
-        var item = response.items[i];
-        // in production code, item.text should have the HTML entities escaped.
-        document.getElementById("content").innerHTML += "<br>" + item.volumeInfo.title;
-      }
-    }
-    </script>
-
-    <script src="<%= fullString %>"></script>
+      <div class="card">
+          <img src="" class="card-img-top" alt="">
+          <div class="card-body">
+            <h2 class="card-title"></h2>
+            <p> <span>Auteur:</span> </p>
+            <p> <span>Pages:</span> </p>
+            <p> <span>Price:</span></p>
+          </div>
+        </div>
+    </main>
+    <%- include('../views/partials/footer'); -%>
   </body>
 </html>
 

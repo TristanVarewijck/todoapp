@@ -1,3 +1,4 @@
+
 function showUploadForm(){
     imageFormUpload = document.getElementById("uploadForm");
     // imageFormUpload.classList.remove(".update-image");

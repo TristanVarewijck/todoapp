@@ -7,6 +7,6 @@ TODO:
 4. Ofcourse styles. 
 <!-- 5. Make a new page (browse books) -->
 6. Book API. 
-7. Take a look at data stored in database.
+<!-- 7. Take a look at data stored in database. -->
 <!-- 8. search bar -->
 9. smart search bar 

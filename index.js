@@ -8,6 +8,7 @@ const Book = require('./models/Book')
 const bodyParser = require('body-parser')
 const multer = require('multer'); 
 require('dotenv').config();
+const axios = require('axios');
 
 
 
@@ -48,13 +49,19 @@ app.use(express.static('public'));
 // get all and 1 book(s)
 app.get('/books', async (req, res) => {
    // filter 
-    let allBooks = await Book.find().sort({createdAt: -1}); 
+  const searchText = req.query.q;
+  let allBooks = await Book.find().sort({createdAt: -1}); 
 
-    if(req.query.search){
-      allBooks = await Book.find({title: req.query.search});
+    if(req.query.q){
+      allBooks = await Book.find({title: req.query.q});
     }
+    if(req.query.q == ""){
+      allBooks = await Book.find().sort({createdAt: -1});
+    }
+   
     res.render('index', {
       allBooks,
+      searchText
     });
   });
 
@@ -128,21 +135,29 @@ app.put('/books/:id/update', upload, async (req, res) => {
   res.redirect(`/books/${id}`); 
 })
 
+
 // Search BOOKS 
 app.get('/bookspot/', async (req, res) => {
-  // SEARCH BAR
-  let apiCall = "https://www.googleapis.com/books/v1/volumes"
-  let bookName = req.query.bookName; 
-  let fullString;
-
-  if(req.query.bookName){
-  fullString = apiCall + "?q=" + bookName + "&callback=handleResponse"; 
-  } else{
-  console.log('doenst work man!')
-  }
-  
-  res.render('findBooks', {fullString, bookName, apiCall}); 
+  // SEARCH BAR 
+  getUser(req.query.q);
+  async function getUser(username){
+    await axios.get('https://api.github.com/users/' + username)
+        .then(response => {
+            console.log(response.data.name);
+            console.log(response.data);
+            res.send(response.data.status);
+        })
+        .catch(error => {
+            console.log(error);
+        })  
+    }
+  res.render('findBooks'); 
 })
+
+
+
+
+
 
 app.listen(port, () => {
 console.log(colors.rainbow(`Example app listening at http://localhost:${port}`))

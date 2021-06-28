@@ -11,9 +11,11 @@
         <div class="list-container">
           <form action="/books" method="GET">
             <label for="search" class="form-label" >Zoek boek bij naam:</label>
-            <input type="search" name="search" placeholder="Type in a Book name:">
-            <button onClick="window.location.reload();">reset </button>
+            <br>
+            <input class="form-control" type="search" name="q" placeholder="Type in a Book name:">
+            <button class="btn btn-secondary-outlined" onClick="function reset()">Reset </button>
           </form>
+
         <% allBooks.forEach(function(Book){ %>
         <div class="card">
             <img src="/images/<%= Book.image %>" class="card-img-top" alt="<%= Book.image %>">
@@ -29,7 +31,6 @@
         </div>
     </main>
     <%- include('../views/partials/footer'); -%>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
     
 </body>
 </html>
