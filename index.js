@@ -1,7 +1,7 @@
 const colors = require('colors'); 
 const express = require('express'); 
 const app = express(); 
-const port = 5050; 
+const port = 3000; 
 let methodOverride = require('method-override')
 const Book = require('./models/Book')
 // const File = require("./models/upload");
@@ -9,6 +9,7 @@ const bodyParser = require('body-parser')
 const multer = require('multer'); 
 require('dotenv').config();
 const axios = require('axios');
+let apiData = null;
 
 
 
@@ -135,23 +136,26 @@ app.put('/books/:id/update', upload, async (req, res) => {
   res.redirect(`/books/${id}`); 
 })
 
-
 // Search BOOKS 
 app.get('/bookspot/', async (req, res) => {
-  // SEARCH BAR 
-  getUser(req.query.q);
-  async function getUser(username){
-    await axios.get('https://api.github.com/users/' + username)
-        .then(response => {
-            console.log(response.data.name);
-            console.log(response.data);
-            res.send(response.data.status);
-        })
-        .catch(error => {
-            console.log(error);
-        })  
-    }
-  res.render('findBooks'); 
+    const username = req.query.q; 
+     await axios.get('https://api.github.com/users/' + username)
+            // Handles the response and returns the data
+            .then(function(response) {
+              return response.data;
+            })
+            // saves the data to a variable for later use 
+            .then(function(data) {
+              apiData = data;
+              console.log(colors.green(apiData));
+            })
+            // error if error 
+            .catch(function(err){
+              console.log(err)
+            })
+
+    res.render('findBooks', {apiData});
+
 })
 
 
