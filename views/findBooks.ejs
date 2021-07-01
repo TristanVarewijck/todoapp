@@ -7,22 +7,28 @@
     <%- include('../views/partials/nav'); -%>
 
     <main>
-        <form action="/bookspot/" style="margin-top: 5em;" method="GET">
+      <div class="list-container">
+      <form action="/bookspot/" style="margin-top: 5em;" method="GET">
           <label for="search">Search Books</label>
-          <input type="text" id="search" name="q">
+          <input type="text" id="search" name="q" value="">
           <br>
           <input type="submit">
         </form>
-
-      <div class="card">
-          <img src="" class="card-img-top" alt="">
+      
+      <% apiData.items.forEach(function(item){ %>
+        <a href="/bookspot/<%= item.id %>">
+        <div class="card">
           <div class="card-body">
-            <h2 class="card-title"></h2>
-            <p> <span>Auteur:</span><%= apiData.location %></p>
-            <p> <span>Pages:</span> </p>
-            <p> <span>Price:</span></p>
+            <h2 class="card-title"><%= item.volumeInfo.title %></h2>
+            <p> <span>Auteur:</span><%= item.volumeInfo.authors %></p>
+            <p> <span>Pages:</span><%= item.volumeInfo.pageCount %></p>
+            <p> <span>Price:</span><%= item.saleInfo.saleability %></p>
           </div>
         </div>
+        </a>
+        <% }); %>
+      </div>
+        
     </main>
     <%- include('../views/partials/footer'); -%>
   </body>

@@ -9,7 +9,17 @@ const bodyParser = require('body-parser')
 const multer = require('multer'); 
 require('dotenv').config();
 const axios = require('axios');
+
+// const httpServer = require("http").createServer();
+// const io = require("socket.io")(httpServer, {
+//   // ...
+// });
+
+// io.on("connection", (socket) => {
+//   // ...
+// });
 let apiData = null;
+let items = null; 
 
 
 
@@ -66,6 +76,11 @@ app.get('/books', async (req, res) => {
     });
   });
 
+
+  app.get('/', (req, res) => {
+    res.redirect('/books'); 
+  })
+
 // create new 
 app.get('/books/new-book', (req, res) => {
   res.render('create'); 
@@ -105,9 +120,10 @@ app.patch('/books/:id', upload, async (req, res) => {
     image: req.file.filename
   }
   await Book.findByIdAndUpdate(id, addFile);
-
   res.redirect(`/books/${id}`);  
 })
+
+
 
 // delete 
 app.delete('/books/:id', async (req, res) => {
@@ -136,27 +152,55 @@ app.put('/books/:id/update', upload, async (req, res) => {
   res.redirect(`/books/${id}`); 
 })
 
+
 // Search BOOKS 
 app.get('/bookspot/', async (req, res) => {
     const username = req.query.q; 
-     await axios.get('https://api.github.com/users/' + username)
+     await axios('https://www.googleapis.com/books/v1/volumes?q=' + username)
             // Handles the response and returns the data
             .then(function(response) {
+              // console.log(response.data)
               return response.data;
             })
             // saves the data to a variable for later use 
             .then(function(data) {
-              apiData = data;
-              console.log(colors.green(apiData));
+              apiData = data; 
+              items = apiData.items;   
             })
             // error if error 
             .catch(function(err){
               console.log(err)
             })
 
-    res.render('findBooks', {apiData});
+            for (let i = 0; i < 20; i++) {
+                items = apiData.items[i];
+            }
+
+    res.render('findBooks', {apiData, items});
 
 })
+
+// app.get('/bookspot/:id', async (req, res) => {
+//   const { id } = req.params; 
+//   const username = req.query.q; 
+//    await axios('https://www.googleapis.com/books/v1/volumes?q=' + username)
+//           // Handles the response and returns the data
+//           .then(function(response) {
+//             return response.data;
+//           })
+//           // saves the data to a variable for later use 
+//           .then(function(data) {
+//             apiData = data;
+//             console.log(colors.green(apiData));
+//           })
+//           // error if error 
+//           .catch(function(err){
+//             console.log(err)
+//           })
+
+//   res.render('findBooks', {apiData});
+
+// })
 
 
 
