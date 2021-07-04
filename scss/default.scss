@@ -15,7 +15,6 @@ $default-font: 'Open Sans', sans-serif;
 .noScroll{
     overflow: hidden ;
     overflow: -moz-hidden-unscrollable; 
-    background-color: rgba(47, 49, 146, 0.5);
     transition: .5s ease-in-out;
     z-index: 99;
 }
@@ -242,10 +241,7 @@ header{
         align-content: space-between;
 
         li{
-            align-items: baseline;
-        }
-        ul li:last-of-type{
-            margin-top: 2.5em;
+            align-self: center;
         }
 
     }

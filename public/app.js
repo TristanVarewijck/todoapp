@@ -1,18 +1,39 @@
 
-const body = document.getElementById('body'); 
+// require 
 const navButton = document.getElementById('navButton'); 
-const nav = document.getElementById('slideNav'); 
-const header = document.getElementById('header'); 
+ 
 
+
+// events 
 navButton.addEventListener("click", showNav); 
 
-function showNav(){
-    header.classList.toggle('noShadow'); 
-    nav.classList.toggle('showNav'); 
-    body.classList.toggle('noScroll');
-}
 
-// toggle by menu click
+// functions 
+function showNav(){
+        const body = document.getElementById('body');
+        const nav = document.getElementById('slideNav'); 
+        const header = document.getElementById('header');
+    
+        header.classList.toggle('noShadow'); 
+        nav.classList.toggle('showNav'); 
+        body.classList.toggle('noScroll');
+    
+        setTimeout(function(){
+        if(navButton.getElementsByTagName("span")[0].innerHTML === "close"){
+            navButton.getElementsByTagName("span")[0].innerHTML = 'menu';
+        
+        } else{
+            navButton.getElementsByTagName("span")[0].innerHTML = 'close'
+        }; 
+ }, 200)
+}
+    
+
+ 
+    
+    
+    
+
 function showUploadForm(){
 
     // form
