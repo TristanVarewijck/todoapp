@@ -3,8 +3,14 @@
     <title>Books API Example</title>
     <%- include('../views/partials/head'); -%>
   </head>
-  <body>
-    <%- include('../views/partials/nav'); -%>
+  <body id="body" class="text-blue-700">
+    
+  
+    <%- include('../views/partials/header'); -%>
+      <br>
+      <nav id="slideNav" class="hideNav">
+      <%- include('../views/partials/showNav'); -%>
+      </nav>
 
     <main>
       <div class="list-container">
@@ -14,11 +20,20 @@
           <br>
           <input type="submit">
         </form>
+
+        
       
       <% apiData.items.forEach(function(item){ %>
         <a href="/bookspot/<%= item.id %>">
         <div class="card">
           <div class="card-body">
+            
+            <% if(item.volumeInfo.imageLinks[1, 2 ,3]) { %>
+              <p>helloworld</p>
+              <% } else{ %> 
+              <p>not found</p>
+              <% } %>
+
             <h2 class="card-title"><%= item.volumeInfo.title %></h2>
             <p> <span>Auteur:</span><%= item.volumeInfo.authors %></p>
             <p> <span>Pages:</span><%= item.volumeInfo.pageCount %></p>

@@ -3,8 +3,16 @@
 <head>
     <%- include('../views/partials/head'); -%>
 </head>
-<body class="text-blue-700">
-    <%- include('../views/partials/nav'); -%>
+<body id="body" class="text-blue-700">
+  <div id="background-blur">
+    
+  
+  <%- include('../views/partials/header'); -%>
+    <br>
+    <nav id="slideNav" class="hideNav">
+    <%- include('../views/partials/showNav'); -%>
+    </nav>
+
     <main>
 
       <!-- FILTER  -->
@@ -31,6 +39,6 @@
         </div>
     </main>
     <%- include('../views/partials/footer'); -%>
-    
+  </div>
 </body>
 </html>

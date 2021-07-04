@@ -159,22 +159,16 @@ app.get('/bookspot/', async (req, res) => {
      await axios('https://www.googleapis.com/books/v1/volumes?q=' + username)
             // Handles the response and returns the data
             .then(function(response) {
-              // console.log(response.data)
               return response.data;
             })
             // saves the data to a variable for later use 
             .then(function(data) {
-              apiData = data; 
-              items = apiData.items;   
+              apiData = data;    
             })
             // error if error 
             .catch(function(err){
               console.log(err)
             })
-
-            for (let i = 0; i < 20; i++) {
-                items = apiData.items[i];
-            }
 
     res.render('findBooks', {apiData, items});
 
@@ -182,7 +176,6 @@ app.get('/bookspot/', async (req, res) => {
 
 // app.get('/bookspot/:id', async (req, res) => {
 //   const { id } = req.params; 
-//   const username = req.query.q; 
 //    await axios('https://www.googleapis.com/books/v1/volumes?q=' + username)
 //           // Handles the response and returns the data
 //           .then(function(response) {
