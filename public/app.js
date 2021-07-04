@@ -2,11 +2,8 @@
 // require 
 const navButton = document.getElementById('navButton'); 
  
-
-
 // events 
 navButton.addEventListener("click", showNav); 
-
 
 // functions 
 function showNav(){
@@ -27,19 +24,15 @@ function showNav(){
         }; 
  }, 200)
 }
-    
-
- 
-    
-    
-    
 
 function showUploadForm(){
-
     // form
     imageFormUpload = document.getElementById("uploadForm");
     imageFormUpload.classList.toggle("update-image-show"); 
     
 };
+
+
+
 
 
