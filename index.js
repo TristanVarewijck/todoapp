@@ -170,7 +170,7 @@ app.get('/bookspot/', async (req, res) => {
               console.log(err)
             })
 
-    res.render('findBooks', {apiData, items});
+    res.render('findBooks', {apiData, items, username});
 
 })
 

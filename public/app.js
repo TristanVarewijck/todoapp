@@ -6,6 +6,8 @@ const navButton = document.getElementById('navButton');
 navButton.addEventListener("click", showNav); 
 
 // functions 
+
+
 function showNav(){
         const body = document.getElementById('body');
         const nav = document.getElementById('slideNav'); 
@@ -23,6 +25,12 @@ function showNav(){
             navButton.getElementsByTagName("span")[0].innerHTML = 'close'
         }; 
  }, 200)
+}
+
+// add active state to nav buttons
+function addActive(){
+    const navLinks = document.querySelectorAll(".nav-link");
+
 }
 
 function showUploadForm(){

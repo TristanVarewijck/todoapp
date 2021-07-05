@@ -16,7 +16,7 @@
       <div class="list-container">
       <form action="/bookspot/" style="margin-top: 5em;" method="GET">
           <label for="search">Search Books</label>
-          <input type="text" id="search" name="q" value="">
+          <input type="text" id="search" name="q" value="<%= username %>">
           <br>
           <input type="submit">
         </form>
@@ -26,14 +26,12 @@
       <% apiData.items.forEach(function(item){ %>
         <a href="/bookspot/<%= item.id %>">
         <div class="card">
+          <% if(item.volumeInfo.imageLinks.thumbnail) { %>
+            <img class="card-img-top" src="<%= item.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
+            <% } else if(item.volumeInfo.imageLinks.thumbnail == undefined || null || " "){ %> 
+            <p>No picture</p>
+            <% } %>
           <div class="card-body">
-            
-            <% if(item.volumeInfo.imageLinks[1, 2 ,3]) { %>
-              <p>helloworld</p>
-              <% } else{ %> 
-              <p>not found</p>
-              <% } %>
-
             <h2 class="card-title"><%= item.volumeInfo.title %></h2>
             <p> <span>Auteur:</span><%= item.volumeInfo.authors %></p>
             <p> <span>Pages:</span><%= item.volumeInfo.pageCount %></p>
