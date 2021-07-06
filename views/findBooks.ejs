@@ -26,10 +26,10 @@
       <% apiData.items.forEach(function(item){ %>
         <a href="/bookspot/<%= item.id %>">
         <div class="card">
-          <% if(item.volumeInfo.imageLinks.thumbnail) { %>
+          <% if(item.volumeInfo.imageLinks) { %>
             <img class="card-img-top" src="<%= item.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
-            <% } else if(item.volumeInfo.imageLinks.thumbnail == undefined || null || " "){ %> 
-            <p>No picture</p>
+            <% } else if(item.volumeInfo.imageLinks == undefined || null || " "){ %> 
+              <img class="card-img-top" src="/images/no-image.png" alt="thumbnail">
             <% } %>
           <div class="card-body">
             <h2 class="card-title"><%= item.volumeInfo.title %></h2>

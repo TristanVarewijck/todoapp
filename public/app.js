@@ -28,10 +28,16 @@ function showNav(){
 }
 
 // add active state to nav buttons
-function addActive(){
-    const navLinks = document.querySelectorAll(".nav-link");
+// function addActive(){
 
-}
+//     const navLinks = document.querySelectorAll(".nav-link");
+//     navLinks.addEventListener("click", addActive);
+
+//     for(item in navLinks){
+        
+//     }
+
+// }
 
 function showUploadForm(){
     // form

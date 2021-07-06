@@ -163,7 +163,7 @@ app.get('/bookspot/', async (req, res) => {
             })
             // saves the data to a variable for later use 
             .then(function(data) {
-              apiData = data;    
+              apiData = data;   
             })
             // error if error 
             .catch(function(err){
