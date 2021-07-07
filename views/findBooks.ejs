@@ -28,7 +28,7 @@
         <div class="card">
           <% if(item.volumeInfo.imageLinks) { %>
             <img class="card-img-top" src="<%= item.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
-            <% } else if(item.volumeInfo.imageLinks == undefined || null || " "){ %> 
+            <% } else { %>
               <img class="card-img-top" src="/images/no-image.png" alt="thumbnail">
             <% } %>
           <div class="card-body">

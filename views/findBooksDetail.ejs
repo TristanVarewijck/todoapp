@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include('../views/partials/head'); -%>
 </head>
-<body>
-    <body id="body" class="text-blue-700">
+<body id="body" class="text-blue-700">
     
   
-        <%- include('../views/partials/header'); -%>
-          <br>
-          <nav id="slideNav" class="hideNav">
-          <%- include('../views/partials/showNav'); -%>
-          </nav>
+    <%- include('../views/partials/header'); -%>
+      <br>
+      <nav id="slideNav" class="hideNav">
+      <%- include('../views/partials/showNav'); -%>
+      </nav>
+    <main>
+        <h1><%= oneBook.volumeInfo.title %></h1>
+
+
+    </main>
     
+ <%- include('../views/partials/footer'); -%>
 </body>
 </html>

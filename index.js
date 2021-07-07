@@ -153,10 +153,14 @@ app.put('/books/:id/update', upload, async (req, res) => {
 })
 
 
+let username = null; 
 // Search BOOKS 
 app.get('/bookspot/', async (req, res) => {
-    const username = req.query.q; 
-     await axios('https://www.googleapis.com/books/v1/volumes?q=' + username)
+      await axios({
+            method: 'GET',
+            apiKey: process.env.API_KEY,  
+            url: 'https://www.googleapis.com/books/v1/volumes?q=' + username,
+            })
             // Handles the response and returns the data
             .then(function(response) {
               return response.data;
@@ -169,31 +173,39 @@ app.get('/bookspot/', async (req, res) => {
             .catch(function(err){
               console.log(err)
             })
-
     res.render('findBooks', {apiData, items, username});
 
 })
 
-// app.get('/bookspot/:id', async (req, res) => {
-//   const { id } = req.params; 
-//    await axios('https://www.googleapis.com/books/v1/volumes?q=' + username)
-//           // Handles the response and returns the data
-//           .then(function(response) {
-//             return response.data;
-//           })
-//           // saves the data to a variable for later use 
-//           .then(function(data) {
-//             apiData = data;
-//             console.log(colors.green(apiData));
-//           })
-//           // error if error 
-//           .catch(function(err){
-//             console.log(err)
-//           })
+// 1 book
 
-//   res.render('findBooks', {apiData});
+app.get('/bookspot/:id', async (req, res) => {
+  const { id } = req.params; 
+  const username = req.query.q;
+  let oneBook = null;
+   await axios({
+          method: 'GET',
+          apiKey: process.env.API_KEY, 
+          url: 'https://www.googleapis.com/books/v1/volumes/' + id,  
+          })
+          // Handles the response and returns the data
+          .then(function(response) {
+            return response.data;
+          })
+          // saves the data to a variable for later use 
+          .then(function(data) {
+            oneBook = data;
+            console.log(colors.green(oneBook));
+            console.log(oneBook.volumeInfo.title);
+          })
+          // error if error 
+          .catch(function(err){
+            console.log(err)
+          })
 
-// })
+  res.render('findBooksDetail', {apiData, username, oneBook});
+
+})
 
 
 
