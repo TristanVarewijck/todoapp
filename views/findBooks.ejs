@@ -16,31 +16,35 @@
       <div class="list-container">
       <form action="/bookspot/" style="margin-top: 5em;" method="GET">
           <label for="search">Search Books</label>
-          <input type="text" id="search" name="q" value="<%= username %>">
           <br>
-          <input type="submit">
+          <input class="form-control" type="text" id="search" name="q" value="<%= username %>" placeholder="Type in a Book name:">
+          
+          <button  style="margin-top: .5em; width: 100%;" class="btn btn-primary" type="submit"> ZOEKEN </button>
         </form>
 
         
-      
-      <% apiData.items.forEach(function(item){ %>
-        <a href="/bookspot/<%= item.id %>">
-        <div class="card">
-          <% if(item.volumeInfo.imageLinks) { %>
-            <img class="card-img-top" src="<%= item.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
-            <% } else { %>
-              <img class="card-img-top" src="/images/no-image.png" alt="thumbnail">
-            <% } %>
-          <div class="card-body">
-            <h2 class="card-title"><%= item.volumeInfo.title %></h2>
-            <p> <span>Auteur:</span><%= item.volumeInfo.authors %></p>
-            <p> <span>Pages:</span><%= item.volumeInfo.pageCount %></p>
-            <p> <span>Price:</span><%= item.saleInfo.saleability %></p>
+      <% if(username == undefined){ %>
+          <div></div>
+      <% } else { %>
+        <% apiData.items.forEach(function(item){ %>
+          <a href="/bookspot/<%= item.id %>">
+          <div class="card">
+            <% if(item.volumeInfo.imageLinks) { %>
+              <img class="card-img-top" src="<%= item.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
+              <% } else { %>
+                <img class="card-img-top" src="/images/no-image.png" alt="thumbnail">
+              <% } %>
+            <div class="card-body">
+              <h2 class="card-title"><%= item.volumeInfo.title %></h2>
+              <p> <span>Auteur:</span><%= item.volumeInfo.authors %></p>
+              <p> <span>Pages:</span><%= item.volumeInfo.pageCount %></p>
+              <p> <span>Price:</span><%= item.saleInfo.saleability %></p>
+            </div>
           </div>
+          </a>
+          <% }); %>
         </div>
-        </a>
-        <% }); %>
-      </div>
+        <% } %>
         
     </main>
     <%- include('../views/partials/footer'); -%>

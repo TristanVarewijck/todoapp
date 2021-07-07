@@ -152,11 +152,12 @@ app.put('/books/:id/update', upload, async (req, res) => {
   res.redirect(`/books/${id}`); 
 })
 
-
-let username = null; 
+let username = null
+ 
 // Search BOOKS 
 app.get('/bookspot/', async (req, res) => {
-      await axios({
+  username = req.query.q;
+  await axios({
             method: 'GET',
             apiKey: process.env.API_KEY,  
             url: 'https://www.googleapis.com/books/v1/volumes?q=' + username,
@@ -173,6 +174,10 @@ app.get('/bookspot/', async (req, res) => {
             .catch(function(err){
               console.log(err)
             })
+
+            
+        
+          
     res.render('findBooks', {apiData, items, username});
 
 })
@@ -183,34 +188,32 @@ app.get('/bookspot/:id', async (req, res) => {
   const { id } = req.params; 
   const username = req.query.q;
   let oneBook = null;
-   await axios({
-          method: 'GET',
-          apiKey: process.env.API_KEY, 
-          url: 'https://www.googleapis.com/books/v1/volumes/' + id,  
-          })
-          // Handles the response and returns the data
-          .then(function(response) {
-            return response.data;
-          })
-          // saves the data to a variable for later use 
-          .then(function(data) {
-            oneBook = data;
-            console.log(colors.green(oneBook));
-            console.log(oneBook.volumeInfo.title);
-          })
-          // error if error 
-          .catch(function(err){
-            console.log(err)
-          })
+        await axios({
+                method: 'GET',
+                apiKey: process.env.API_KEY, 
+                url: 'https://www.googleapis.com/books/v1/volumes/' + id,  
+                })
+                // Handles the response and returns the data
+                .then(function(response) {
+                  return response.data;
+                })
+                // saves the data to a variable for later use 
+                .then(function(data) {
+                  oneBook = data;
+                  console.log(colors.green(oneBook));
+                })
+                // error if error 
+                .catch(function(err){
+                  console.log(err)
+                })
 
   res.render('findBooksDetail', {apiData, username, oneBook});
 
-})
+}); 
 
-
-
-
-
+app.get('*', function(req, res){
+  res.send('what???', 404);
+});
 
 app.listen(port, () => {
 console.log(colors.rainbow(`Example app listening at http://localhost:${port}`))
