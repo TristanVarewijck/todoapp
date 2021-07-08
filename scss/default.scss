@@ -260,5 +260,28 @@ input[type=search]{
 
     }   
 }
+
+
+.detail{
+
+    img{
+        width: 150px; 
+        height: auto;
+    }
+
+    h1{
+        margin: .5em 0 .5em 0; 
+    
+    }
+
+    h3{
+        margin-top: .5em ;
+        font-size: .9em ;
+        font-weight: bold;
+        text-transform: capitalize;
+       
+    }
+
+}
  
 

@@ -4,18 +4,38 @@
     <%- include('../views/partials/head'); -%>
 </head>
 <body id="body" class="text-blue-700">
-    
-  
     <%- include('../views/partials/header'); -%>
       <br>
       <nav id="slideNav" class="hideNav">
       <%- include('../views/partials/showNav'); -%>
       </nav>
     <main>
+    <div class="list-container">
+        <div class="detail">
+        <img src="<%= oneBook.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
+        <small class="form-text text-muted">Published: <%= oneBook.volumeInfo.publishedDate %></small>
+        <!-- Title -->
         <h1><%= oneBook.volumeInfo.title %></h1>
+
+        <!-- Auteur -->
+        <h3>Author</h3>
         <p><%= oneBook.volumeInfo.authors %></p>
+
+        <!-- Taal -->
+        <h3>Genre's</h3>
+        <p><%= oneBook.volumeInfo.categories %></p>
+
+        <!-- Description -->
+        <h3>Description</h3>
         <p><%= oneBook.volumeInfo.description %></p>
 
+        <!-- Pages -->
+        <h3>Pages</h3>
+        <p><%= oneBook.volumeInfo.pageCount %></p>
+
+        
+        </div>
+         </div>
     </main>
     
  <%- include('../views/partials/footer'); -%>
