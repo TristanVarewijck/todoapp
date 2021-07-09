@@ -9,32 +9,88 @@
       <nav id="slideNav" class="hideNav">
       <%- include('../views/partials/showNav'); -%>
       </nav>
-    <main>
+    <main class="detail">
     <div class="list-container">
-        <div class="detail">
+        <div>
         <img src="<%= oneBook.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
         <small class="form-text text-muted">Published: <%= oneBook.volumeInfo.publishedDate %></small>
         <!-- Title -->
         <h1><%= oneBook.volumeInfo.title %></h1>
 
         <!-- Auteur -->
-        <h3>Author</h3>
+        <h3>Author(s)</h3>
         <p><%= oneBook.volumeInfo.authors %></p>
 
         <!-- Taal -->
-        <h3>Genre's</h3>
+        <h3>Genre(s)</h3>
         <p><%= oneBook.volumeInfo.categories %></p>
 
         <!-- Description -->
         <h3>Description</h3>
         <p><%= oneBook.volumeInfo.description %></p>
+         
+
+         <div class="tab" style="margin:2em 0 1em 0 ;">
+           <button>BUY</button>
+           <button>MORE INFO</button>
+         </div>
+
+        
+        <section class="tabcontent">
+        <h3>Title</h3>
+        <h1><%= oneBook.volumeInfo.title %></h1>
+
+        <!-- Auteur -->
+        <h3>Publisher</h3>
+        <p><%= oneBook.volumeInfo.publisher %></p>
+
+        <!-- Taal -->
+        <h3>Publish Date</h3>
+        <p><%= oneBook.volumeInfo.publishedDate %></p>
+
+        <!-- Description -->
+        <h3>Categories</h3>
+        <p><%= oneBook.volumeInfo.categories %></p>
 
         <!-- Pages -->
         <h3>Pages</h3>
         <p><%= oneBook.volumeInfo.pageCount %></p>
 
-        
-        </div>
+        <!-- Pages -->
+        <h3>language</h3>
+        <p><%= oneBook.volumeInfo.language %></p>
+
+        <!-- Pages -->
+        <h3>description</h3>
+        <p><%= oneBook.volumeInfo.description %></p>
+
+        <!-- Pages -->
+        <h3>Extra info</h3>
+        <p><a href="<%= oneBook.volumeInfo.infoLink %>">CLICK FOR MORE INFO!</a></p>
+        </section>
+
+
+         <!-- Sale info -->
+
+        <section class="tabcontent">
+        <!-- Country -->
+        <h3>Country</h3>
+        <p><%= oneBook.saleInfo.country %></p>
+
+        <!-- for sale? -->
+        <h3>For sale</h3>
+        <p><%= oneBook.saleInfo.saleability %></p>
+
+        <!-- Price -->
+        <h3>Price</h3>
+        <p><%= oneBook.saleInfo.saleInfo %></p>
+
+        <!-- Buy Online -->
+        <h3>Buy Online</h3>
+        <p><a href="<%= oneBook.saleInfo.buyLink %>"></p>CLICK HERE TO BUY!</a></p>
+
+         </section>
+         </div>
          </div>
     </main>
     
