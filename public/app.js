@@ -25,17 +25,27 @@ function showNav(){
  }, 200)
 }
 
-// add active state to nav buttons
-// function addActive(){
 
-//     const navLinks = document.querySelectorAll(".nav-link");
-//     navLinks.addEventListener("click", addActive);
 
-//     for(item in navLinks){
-        
-//     }
 
-// }
+function navState(evt, ){
+    let navButtons; 
+    // navLinks.addEventListener("click", navState());
+    navButtons = document.getElementsByClassName("nav-link");
+    for(i = 0; i < navButtons.length; i++){
+        navButtons[i].className = tabButtons[i].className.replace('active', "");  
+    }
+
+    document.getElementById(contentType).style.display = "block";
+    evt.currentTarget.className += " active";
+
+
+
+    console.log(navButtons);
+
+}
+
+navState(); 
 
 function openContent(evt, contentType){
     let i, tabcontent, tabButtons;
