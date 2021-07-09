@@ -10,6 +10,7 @@
       <%- include('../views/partials/showNav'); -%>
       </nav>
     <main class="detail">
+    
     <div class="list-container">
         <div>
         <img src="<%= oneBook.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
@@ -31,12 +32,13 @@
          
 
          <div class="tab" style="margin:2em 0 1em 0 ;">
-           <button>BUY</button>
-           <button>MORE INFO</button>
+          <button class="tabButton" onclick="openContent(event, 'extraInfo')">MORE INFO</button>
+          <button class="tabButton" onclick="openContent(event, 'saleInfo')">BUY</button>
+           
          </div>
 
         
-        <section class="tabcontent">
+        <section class="tabcontent" id="extraInfo">
         <h3>Title</h3>
         <h1><%= oneBook.volumeInfo.title %></h1>
 
@@ -72,7 +74,8 @@
 
          <!-- Sale info -->
 
-        <section class="tabcontent">
+        <section class="tabcontent" id="saleInfo">
+        
         <!-- Country -->
         <h3>Country</h3>
         <p><%= oneBook.saleInfo.country %></p>
@@ -87,7 +90,7 @@
 
         <!-- Buy Online -->
         <h3>Buy Online</h3>
-        <p><a href="<%= oneBook.saleInfo.buyLink %>"></p>CLICK HERE TO BUY!</a></p>
+        <p><a href="<%= oneBook.saleInfo.buyLink %>">CLICK HERE TO BUY!</a></p>
 
          </section>
          </div>

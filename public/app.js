@@ -6,8 +6,6 @@ const navButton = document.getElementById('navButton');
 navButton.addEventListener("click", showNav); 
 
 // functions 
-
-
 function showNav(){
         const body = document.getElementById('body');
         const nav = document.getElementById('slideNav'); 
@@ -38,6 +36,23 @@ function showNav(){
 //     }
 
 // }
+
+function openContent(evt, contentType){
+    let i, tabcontent, tabButtons;
+
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+    tabButtons = document.getElementsByClassName("tabButton"); 
+    for (i = 0; i < tabButtons.length; i++){
+        tabButtons[i].className = tabButtons[i].className.replace('active', ""); 
+    }
+
+    document.getElementById(contentType).style.display = "block";
+    evt.currentTarget.className += " active";  
+}
 
 function showUploadForm(){
     // form

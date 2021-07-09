@@ -18,8 +18,9 @@ const axios = require('axios');
 // io.on("connection", (socket) => {
 //   // ...
 // });
-let apiData = null;
-let items = null; 
+ 
+
+let apiData, items = null;
 
 
 
