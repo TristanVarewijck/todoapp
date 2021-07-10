@@ -28,26 +28,20 @@ function showNav(){
 
 
 
-function navState(evt, ){
-    let navButtons; 
-    // navLinks.addEventListener("click", navState());
-    navButtons = document.getElementsByClassName("nav-link");
-    for(i = 0; i < navButtons.length; i++){
-        navButtons[i].className = tabButtons[i].className.replace('active', "");  
-    }
+// function navState(evt, tabID){
+//     let navButtons; 
+//     // navLinks.addEventListener("click", navState());
+//     navButtons = document.getElementsByClassName("nav-link");
+//     for(i = 0; i < navButtons.length; i++){
+//         navButtons[i].className = navButtons[i].className.replace('activeButton', " ");  
+//     }
 
-    document.getElementById(contentType).style.display = "block";
-    evt.currentTarget.className += " active";
+//         document.getElementById(tabID).classList.add = "activeButton";
+//         evt.currentTarget.className += "activeButton";
 
+// }
 
-
-    console.log(navButtons);
-
-}
-
-navState(); 
-
-function openContent(evt, contentType){
+function openContent(evt, contentType, callback){
     let i, tabcontent, tabButtons;
 
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -61,7 +55,9 @@ function openContent(evt, contentType){
     }
 
     document.getElementById(contentType).style.display = "block";
-    evt.currentTarget.className += " active";  
+    evt.currentTarget.className += "active"; 
+    
+    document.getElementById(contentType).scrollIntoView(true);
 }
 
 function showUploadForm(){

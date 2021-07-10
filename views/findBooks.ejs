@@ -24,7 +24,9 @@
 
         
       <% if(username == undefined){ %>
-          <div></div>
+          <div>
+            <p style="font-weight: bold;">Type in a book name to search for a book!</p>
+          </div>
       <% } else { %>
         <% apiData.items.forEach(function(item){ %>
           <a href="/bookspot/<%= item.id %>">

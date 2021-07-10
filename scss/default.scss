@@ -14,7 +14,8 @@ $default-font: 'Open Sans', sans-serif;
 *{
     color:$text-color;
     list-style-type: none;
-    font-family: $default-font; 
+    font-family: $default-font;
+    scroll-behavior: smooth; 
  }
 
 .noScroll{
@@ -56,6 +57,10 @@ nav{
 
 ul{
      padding: $default-margin;
+}
+
+.activeButton{
+    color: blue;
 }
  
  /* CARD  */
@@ -211,6 +216,8 @@ input[type=search]{
     background-color: rgba(100, 100, 100, 0.0); 
     border: none; 
 }
+
+
 
 .hideNav{
     width: 100%;    
