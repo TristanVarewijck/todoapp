@@ -25,9 +25,6 @@ function showNav(){
  }, 200)
 }
 
-
-
-
 // function navState(evt, tabID){
 //     let navButtons; 
 //     // navLinks.addEventListener("click", navState());
@@ -56,8 +53,7 @@ function openContent(evt, contentType, callback){
 
     document.getElementById(contentType).style.display = "block";
     evt.currentTarget.className += "active"; 
-    
-    document.getElementById(contentType).scrollIntoView(true);
+    document.getElementById("tabs").scrollIntoView(true);
 }
 
 function showUploadForm(){

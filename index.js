@@ -1,7 +1,7 @@
 const colors = require('colors'); 
 const express = require('express'); 
 const app = express(); 
-const port = 5000; 
+const port = 8000; 
 let methodOverride = require('method-override')
 const Book = require('./models/Book')
 // const File = require("./models/upload");
@@ -9,23 +9,15 @@ const bodyParser = require('body-parser')
 const multer = require('multer'); 
 require('dotenv').config();
 const axios = require('axios');
-
-// const httpServer = require("http").createServer();
-// const io = require("socket.io")(httpServer, {
-//   // ...
-// });
-
-// io.on("connection", (socket) => {
-//   // ...
-// });
- 
-
+const mongoose = require('mongoose');
 let apiData, items = null;
+let username = null;
 
-
-
-// storage
-// SET STORAGE
+// SOCKET.IO
+// USER: https://socket.io/
+ 
+// MULTER
+// SET STORAGE: https://www.npmjs.com/package/multer
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/images')
@@ -35,15 +27,17 @@ let storage = multer.diskStorage({
   }
 })
 
- 
 let upload = multer({ storage: storage }).single('file'); 
 
-
+// BODYPARSER
+// TO JSON FORMAT
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-const mongoose = require('mongoose');
-mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+// MONGOOSE 
+// https://mongoosejs.com/docs/
+mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
 
 const db = mongoose.connection;
@@ -53,14 +47,21 @@ db.once('open', function() {
 })
 
 
+// EXPRESS SETTINGS
 app.use(methodOverride('_method'))
 app.set('view engine', 'ejs');
 app.use(express.static('public')); 
   
 
-// get all and 1 book(s)
-app.get('/books', async (req, res) => {
-   // filter 
+
+
+// ROUTES
+app.get('/', (req, res) => {
+  res.redirect('/books'); 
+})
+
+// Get all and 1 book(s)
+app.get('/books', async (req, res) => { 
   const searchText = req.query.q;
   let allBooks = await Book.find().sort({createdAt: -1}); 
 
@@ -78,11 +79,7 @@ app.get('/books', async (req, res) => {
   });
 
 
-  app.get('/', (req, res) => {
-    res.redirect('/books'); 
-  })
-
-// create new 
+// create new book 
 app.get('/books/new-book', (req, res) => {
   res.render('create'); 
 })
@@ -108,6 +105,7 @@ app.post('/books', upload, async (req, res) => {
   });
 });
 
+// DETAIL
 app.get('/books/:id' , async (req, res) => {
   let { id } = req.params; 
   let bookDetail = await Book.findById(id); 
@@ -124,16 +122,14 @@ app.patch('/books/:id', upload, async (req, res) => {
   res.redirect(`/books/${id}`);  
 })
 
-
-
-// delete 
+// DELETE 
 app.delete('/books/:id', async (req, res) => {
   let { id } = req.params; 
   await Book.findByIdAndDelete(id);
   res.redirect('/books')
 }); 
 
-// update
+// UPDATE
 app.get('/books/:id/update', async (req, res) => {
   let { id } = req.params;
   let bookDetail = await Book.findById(id);
@@ -152,8 +148,6 @@ app.put('/books/:id/update', upload, async (req, res) => {
   await Book.findByIdAndUpdate(id, updateBook);
   res.redirect(`/books/${id}`); 
 })
-
-let username = null
  
 // Search BOOKS 
 app.get('/bookspot/', async (req, res) => {
@@ -176,15 +170,11 @@ app.get('/bookspot/', async (req, res) => {
               console.log(err)
             })
 
-            
-        
-          
     res.render('findBooks', {apiData, items, username});
 
 })
 
 // 1 book
-
 app.get('/bookspot/:id', async (req, res) => {
   const { id } = req.params; 
   const username = req.query.q;
@@ -209,11 +199,10 @@ app.get('/bookspot/:id', async (req, res) => {
                 })
 
   res.render('findBooksDetail', {apiData, username, oneBook});
-
 }); 
 
 app.get('*', function(req, res){
-  res.send('what???', 404);
+  res.status(404).send('<h1>404 PAGE NOT FOUND! TRY AGAIN PLEASE!</h1> <br> <a class="back-button" href="/books">GOBACK</a>');
 });
 
 app.listen(port, () => {
