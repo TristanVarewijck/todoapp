@@ -12,6 +12,8 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 let apiData, items = null;
 let username = null;
+let oneBook = null;
+let addBook = null;
 
 // SOCKET.IO
 // USER: https://socket.io/
@@ -178,7 +180,6 @@ app.get('/bookspot/', async (req, res) => {
 app.get('/bookspot/:id', async (req, res) => {
   const { id } = req.params; 
   const username = req.query.q;
-  let oneBook = null;
         await axios({
                 method: 'GET',
                 apiKey: process.env.API_KEY, 
@@ -202,40 +203,46 @@ app.get('/bookspot/:id', async (req, res) => {
 }); 
 
 app.post('/bookspot/:id', async (req, res) => {
-  const { id } = req.params; 
-  const username = req.query.q;
-  let oneBook = null;
+  const { id } = req.params;  
         await axios({
                 method: 'GET',
                 apiKey: process.env.API_KEY, 
                 url: 'https://www.googleapis.com/books/v1/volumes/' + id,  
                 })
                 // Handles the response and returns the data
-                .then(function(response) {
+                .then( async function(response) {
                   return response.data;
                 })
                 // saves the data to a variable for later use 
-                .then(function(data) {
+                .then( async function(data) {
                   oneBook = data;
-                  console.log(colors.green(oneBook));
+                  // console.log(colors.green(oneBook));
+                  addBook = {
+                    title: oneBook.volumeInfo.title, 
+                    auteur: oneBook.volumeInfo.authors, 
+                    pages: oneBook.volumeInfo.pageCount, 
+                    price: 12, 
+                    description: oneBook.volumeInfo.description,
+                    image: oneBook.volumeInfo.imageLinks.thumbnail, 
+                  }
+                  console.log(addBook); 
+                  addBook = await addBook.save(); 
+
+                
                 })
                 // error if error 
                 .catch(function(err){
                   console.log(err)
                 })
 
-                let addBook = {
-                  title: oneBook.volumeInfo.title, 
-                  auteur: oneBook.volumeInfo.title, 
-                  pages: oneBook.volumeInfo.title, 
-                  price: oneBook.volumeInfo.title, 
-                  description: oneBook.volumeInfo.title,
-                  image: oneBook.volumeInfo.imageLinks.thumbnail, 
-                }
-                
-                await Book.create({addBook});
-
-
+                // let addBook = {
+                //   title: oneBook.volumeInfo.title, 
+                //   auteur: oneBook.volumeInfo.title, 
+                //   pages: oneBook.volumeInfo.title, 
+                //   price: oneBook.volumeInfo.title, 
+                //   description: oneBook.volumeInfo.title,
+                //   image: oneBook.volumeInfo.imageLinks.thumbnail, 
+                // }
 
   res.render('findBooksDetail', {apiData, username, oneBook});
 });

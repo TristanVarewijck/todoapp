@@ -10,7 +10,7 @@ const bookSchema = new mongoose.Schema({
         // required: true, 
     },
     auteur: {
-        type: String, 
+        type: Array, 
     }, 
     pages:{
         type: Number, 
