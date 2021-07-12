@@ -81,6 +81,8 @@ app.get('/books', async (req, res) => {
   });
 
 
+
+
 // create new book 
 app.get('/books/new-book', (req, res) => {
   res.render('create'); 
@@ -202,7 +204,7 @@ app.get('/bookspot/:id', async (req, res) => {
   res.render('findBooksDetail', {apiData, username, oneBook});
 }); 
 
-app.post('/bookspot/:id', async (req, res) => {
+app.post('/bookspot/:id', upload, async (req, res) => {
   const { id } = req.params;  
         await axios({
                 method: 'GET',
@@ -223,11 +225,10 @@ app.post('/bookspot/:id', async (req, res) => {
                     pages: oneBook.volumeInfo.pageCount, 
                     price: 12, 
                     description: oneBook.volumeInfo.description,
-                    image: oneBook.volumeInfo.imageLinks.thumbnail, 
+                    image: req.file,
                   }
-                  console.log(addBook); 
-                  addBook = await addBook.save(); 
 
+                   await Book.create(addBook);
                 
                 })
                 // error if error 

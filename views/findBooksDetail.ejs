@@ -16,8 +16,9 @@
         <img src="<%= oneBook.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
         <small class="form-text text-muted">Published: <%= oneBook.volumeInfo.publishedDate %></small>
       
-        <form action="/bookspot/<%= oneBook.id %>" method="POST">
+        <form action="/bookspot/<%= oneBook.id %>" method="POST" enctype="multipart/form-data">
           <label for="add" hidden>Add to your booklist</label>
+          <input type="file" value="oneBook.volumeInfo.imageLinks.thumbnail" hidden>
           <input type="submit">
         </form>
         <!-- Title -->
@@ -78,7 +79,6 @@
 
 
          <!-- Sale info -->
-
         <section class="tabcontent" id="saleInfo">
         
         <!-- Country -->
