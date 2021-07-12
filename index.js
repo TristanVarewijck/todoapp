@@ -201,6 +201,45 @@ app.get('/bookspot/:id', async (req, res) => {
   res.render('findBooksDetail', {apiData, username, oneBook});
 }); 
 
+app.post('/bookspot/:id', async (req, res) => {
+  const { id } = req.params; 
+  const username = req.query.q;
+  let oneBook = null;
+        await axios({
+                method: 'GET',
+                apiKey: process.env.API_KEY, 
+                url: 'https://www.googleapis.com/books/v1/volumes/' + id,  
+                })
+                // Handles the response and returns the data
+                .then(function(response) {
+                  return response.data;
+                })
+                // saves the data to a variable for later use 
+                .then(function(data) {
+                  oneBook = data;
+                  console.log(colors.green(oneBook));
+                })
+                // error if error 
+                .catch(function(err){
+                  console.log(err)
+                })
+
+                let addBook = {
+                  title: oneBook.volumeInfo.title, 
+                  auteur: oneBook.volumeInfo.title, 
+                  pages: oneBook.volumeInfo.title, 
+                  price: oneBook.volumeInfo.title, 
+                  description: oneBook.volumeInfo.title,
+                  image: oneBook.volumeInfo.imageLinks.thumbnail, 
+                }
+                
+                await Book.create({addBook});
+
+
+
+  res.render('findBooksDetail', {apiData, username, oneBook});
+});
+
 app.get('*', function(req, res){
   res.status(404).send('<h1>404 PAGE NOT FOUND! TRY AGAIN PLEASE!</h1> <br> <a class="back-button" href="/books">GOBACK</a>');
 });

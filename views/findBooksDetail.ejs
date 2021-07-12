@@ -15,6 +15,11 @@
         <div>
         <img src="<%= oneBook.volumeInfo.imageLinks.thumbnail %>" alt="thumbnail">
         <small class="form-text text-muted">Published: <%= oneBook.volumeInfo.publishedDate %></small>
+      
+        <form action="/bookspot/<%= oneBook.id %>" method="POST">
+          <label for="add" hidden>Add to your booklist</label>
+          <input type="submit">
+        </form>
         <!-- Title -->
         <h1><%= oneBook.volumeInfo.title %></h1>
 
